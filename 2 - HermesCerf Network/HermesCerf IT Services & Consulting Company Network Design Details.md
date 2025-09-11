@@ -486,5 +486,120 @@ service password-encryption
 enable secret ramcie12345
 banner motd "Unauthorized access is strictly prohibited!"
 
+Software Engineering | VLAN 10 | 10.10.10.0/24 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.10.0
+    > Subnet Mask: 255.255.255.0 
+    > Usable host range: 10.10.10.1 - 10.10.10.254
+    > Broadcast address: 10.10.10.255
+IPv6 Addressing Scheme:
+    > 
 
+
+Infrastructure | VLAN 20 | 10.10.20.0/24 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.20.0
+    > Subnet Mask: 255.255.255.0
+    > Usable host range: 10.10.20.1 - 10.10.10.254
+    > Broadcast address: 10.10.20.255
+IPv6 Addressing Scheme:
+    > 
+
+
+Technical Operations | VLAN 30 | 10.10.30.0/27 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.30.0
+    > Subnet Mask: 255.255.255.224
+    > Usable host range: 10.10.30.1 - 10.10.30.30
+    > Broadcast address: 10.10.10.31
+IPv6 Addressing Scheme:
+    > 
+
+Sales & Marketing | VLAN 40 | 10.10.40.0/26|
+IPv4 Addressing Scheme
+    > Network Address: 10.10.40.0
+    > Subnet Mask: 255.255.255.192
+    > Usable host range: 10.10.40.1 - 10.10.40.62
+    > Broadcast address: 10.10.40.63
+IPv6 Addressing Scheme:
+    > 
+
+
+Customer Agents | VLAN 50 | 10.10.50.0/24 | 
+IPv4 Addressing Scheme
+    > Network Address: 10.10.50.0
+    > Subnet Mask: 255.255.255.0 or /24
+    > Usable host range: 10.10.50.1 - 10.10.50.254
+    > Broadcast address: 10.10.50.255
+IPv6 Addressing Scheme:
+    > 
+
+
+Accounting & Payroll | VLAN 60 | 10.10.60.0/27 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.60.0
+    > Subnet Mask: 255.255.255.224
+    > Usable host range: 10.10.60.1 - 10.10.10.30
+    > Broadcast address: 10.10.60.31
+IPv6 Addressing Scheme:
+    > 
+
+
+Human Resources | VLAN 70 | 10.10.70.0/26 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.70.0
+    > Subnet Mask: 255.255.255.192
+    > Usable host range: 10.10.70.1 - 10.10.70.62
+    > Broadcast address: 10.10.10.63
+IPv6 Addressing Scheme:
+    > 
+
+
+Procurement | VLAN 80 | 10.10.80.0/28|
+IPv4 Addressing Scheme
+    > Network Address: 10.10.80.0
+    > Subnet Mask: 255.255.255.240
+    > Usable host range: 10.10.80.1 - 10.10.80.14
+    > Broadcast address: 10.10.80.15
+IPv6 Addressing Scheme:
+    >  
+
+Network Management| 90 | 10.10.90.0/24 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.90.0
+    > Subnet Mask: 255.255.255.0
+    > Usable host range: 10.10.90.1 - 10.10.90.254
+    > Broadcast address: 10.10.90.255
+IPv6 Addressing Scheme:
+    > 
+
+
+Servers | VLAN 100 | 10.10.100.0/24 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.100.0
+    > Subnet Mask: 255.255.255.0
+    > Usable host range: 10.10.100.1 - 10.10.100.254
+    > Broadcast address: 10.10.100.255
+IPv6 Addressing Scheme:
+    > 
+
+
+Printers | VLAN 110 | 10.10.110.0/24 | 
+IPv4 Addressing Scheme
+    > Network Address: 10.10.110.0
+    > Subnet Mask: 255.255.255.0
+    > Usable host range: 10.10.110.1 - 10.10.110.254
+    > Broadcast address: 10.10.110.255
+IPv6 Addressing Scheme:
+    > 
+
+
+Wireless | VLAN 120 | 10.10.120.0/24 |
+IPv4 Addressing Scheme
+    > Network Address: 10.10.120.0
+    > Subnet Mask: 255.255.255.0
+    > Usable host range: 10.10.120.1 - 10.10.120.254
+    > Broadcast address: 10.10.120.255
+IPv6 Addressing Scheme:
+    > 
 
