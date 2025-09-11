@@ -64,7 +64,7 @@ This showcases the placement and division of network devices on the premises of 
     - 13 PCs
 
 - **Business Operations Room**
-    - an access switch shared by Sales & Marketing and HR (48 ports - 8 Etherchannel trunks = 40 usable ports) | Access Switch 7 - 8
+    - 2 access switches shared by Sales & Marketing and HR (48 ports - 8 Etherchannel trunks = 40 usable ports) | Access Switch 7 - 8
     - 2 printers
     - 2 IP phones
     - 2 access points
@@ -121,18 +121,32 @@ This showcases the connections and network address blocks utilized in these conn
 - **Access Switch 1**
     - fa0/1-2 -> Core Switch 1
     - fa0/3-4 -> Core Switch 2
+    - fa0/5-21 -> Access Ports for VLAN 10
+    - fa0/22 -> EngrWingIPPhone1
+    - fa0/23 -> EngrWingAccessPoint1
+    - fa0/24 -> EngrWingPrinter1
+
 
 - **Access Switch 2**
     - fa0/1-2 -> Core Switch 1
     - fa0/3-4 -> Core Switch 2
+    - fa0/5-21 -> Access Ports for VLAN 10
+    - fa0/22 -> EngrWingIPPhone2
+    - fa0/23 -> EngrWingAccessPoint2
+    - fa0/24 -> EngrWingPrinter2
 
 - **Access Switch 3**
     - fa0/1-2 -> Core Switch 1
     - fa0/3-4 -> Core Switch 2
+    - fa0/5-21 -> Access Ports for VLAN 30
+    - fa0/22 -> TechOpRoomIPPhone
+    - fa0/23 -> TechOpRoomAccessPoint
+    - fa0/24 -> TechOpRoomPrinter
 
 - **Access Switch 4**
     - fa0/1-2 -> Core Switch 1
     - fa0/3-4 -> Core Switch 2
+
 
 - **Access Switch 5**
     - fa0/1-2 -> Core Switch 1
@@ -141,6 +155,13 @@ This showcases the connections and network address blocks utilized in these conn
 - **Access Switch 6**
     - fa0/1-2 -> Core Switch 1
     - fa0/3-4 -> Core Switch 2
+    - fa0/5-13 -> Accounting & Payroll Access Port
+    - 
+    - fa0/14-20 -> Procurement Access Port
+    - fa0/20-21 -> TechOpRoomIPPhone
+    - fa0/22 -> TechOpRoomAccessPoint 
+    - fa0/23-24 -> TechOpRoomPrinter
+
 
 - **Access Switch 7**
     - fa0/1-2 -> Core Switch 1
@@ -149,6 +170,321 @@ This showcases the connections and network address blocks utilized in these conn
 - **Access Switch 8**
     - fa0/1-2 -> Core Switch 1
     - fa0/3-4 -> Core Switch 2
+
+
+
+## Configurations
+
+### EdgeRouter1
+enable 
+configure terminal
+ipv6 unicast-routing
+
+hostname EdgeRouter1
+service password-encryption
+security passwords min-length 10
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+login block-for 15 attempts 5 within 30
+
+line con 0
+logging synchronous
+password ramcie12345
+login 
+exit
+
+line vty 0 4
+loggin synchronous
+password ramcie12345
+login
+exit
+
+
+### EdgeRouter2
+enable 
+configure terminal
+ipv6 unicast-routing
+
+hostname EdgeRouter2
+service password-encryption
+security passwords min-length 10
+enable secret ramcie12345
+login block-for 15 attempts 5 within 30
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous
+password ramcie12345
+login
+exit
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+login
+exit
+
+
+### CoreSwitch1
+enable
+configure terminal
+hostname CoreSwitch1
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+security passwords min-length 10 (not available)
+login block-for 15 attempts 5 within 30
+
+line con 0
+logging synchronous
+password ramcie12345
+login
+exit
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+login
+exit
+
+ipv6 unicast-routing
+
+### CoreSwitch2
+enable
+configure terminal
+hostname CoreSwitch2
+service password-encryption
+enable secret ramcie12345
+login block-for 15 attempts 5 within 30
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous
+password ramcie12345
+login 
+exit
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+login
+exit
+
+
+### AccessSwitch1
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch1
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous
+password ramcie12345
+login
+exit 
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+login
+exit
+
+ipv6 unicast-routing
+
+### AccessSwitch2
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch2
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous 
+password ramcie12345
+login
+
+line vty 0 4
+loggin synchronous
+password ramcie12345
+login
+
+ipv6 unicast-routing
+
+### AccessSwitch3
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch3
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous
+password ramcie12345
+login
+exit
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+login 
+exit
+
+ipv6 unicast-routing
+
+### AccessSwitch4
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch4
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous
+password ramcie12345
+login
+exit
+
+line vty 0 4
+logging synchronous 
+password ramcie12345
+login
+exit
+
+ipv6 unicast-routing
+
+
+### AccessSwitch5
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch5
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous
+password ramcie12345
+login
+exit
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+login
+exit
+
+ipv6 unicast-routing
+
+
+
+### AccessSwitch6
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch6
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+line con 0
+logging synchronous 
+password ramcie12345
+login
+exit
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+login 
+exit
+
+### AccessSwitch7
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch7
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+ipv6 unicast-routing
+
+
+### AccessSwitch8
+enable 
+configure terminal
+sdm prefer dual-ipv4-and-ipv6 default
+end
+reload
+
+enable
+Show sdm prefer
+configure terminal
+no ip domain lookup
+hostname AccessSwitch8
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
 
 
 
