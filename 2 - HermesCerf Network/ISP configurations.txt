@@ -1,0 +1,21 @@
+hostname ISP
+no ip domain lookup
+ip routing 
+ipv6 unicast routing
+
+
+int g0/0/0
+description "Link to EdgeRouter1"
+ip add 201.0.113.1 255.255.255.252
+ipv6 add 2001:db8:acad:1::1/64
+no shutdown
+exit
+
+router ospf 100
+router-id 100.100.100.100
+network 201.0.113.0 0.0.0.3 area 0
+default-information originate
+exit
+
+ip route 0.0.0.0 0.0.0.0 Null0
+
