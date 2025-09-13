@@ -31,6 +31,7 @@ ip route 192.168.100.0 255.255.255.0 192.168.254.1
 hostname Core_Switch
 
 ip routing
+spanning tree mode rapid-pvst
 
 interface Vlan10
 ip address 192.168.10.1 255.255.255.0
@@ -102,6 +103,8 @@ name Operations
 vlan 100
 name Server
 
+spanning-tree mode rapid-pvst
+
 int g0/1
 switchport mode trunk
 switchport trunk allowed vlan 10,20,30,100
@@ -109,6 +112,8 @@ switchport trunk allowed vlan 10,20,30,100
 int r fa0/1-24
 switchport mode access
 switchport access vlan 10
+spanning-tree portfast
+spanning-tree bpduguard enable
 
 ## Sales Dept. Access Switch
 vlan 10
@@ -120,6 +125,8 @@ name Operations
 vlan 100
 name Server
 
+spanning-tree mode rapid-pvst
+
 int g0/1
 switchport mode trunk
 switchport trunk allowed vlan 10,20,30,100
@@ -127,6 +134,8 @@ switchport trunk allowed vlan 10,20,30,100
 int r fa0/1-24
 switchport mode access
 switchport access vlan 20
+spanning-tree portfast
+spanning-tree bpduguard enable
 
 
 ## Operations Dept. Access Switch
@@ -139,6 +148,8 @@ name Operations
 vlan 100
 name Server
 
+spanning-tree mode rapid-pvst
+
 int g0/1
 switchport mode trunk
 switchport trunk allowed vlan 10,20,30,100
@@ -146,6 +157,8 @@ switchport trunk allowed vlan 10,20,30,100
 int r fa0/1-24
 switchport mode access
 switchport access vlan 30
+spanning-tree portfast
+spanning-tree bpduguard enable
 
 
 
