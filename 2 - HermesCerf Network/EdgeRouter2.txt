@@ -1,0 +1,46 @@
+hostname EdgeRouter1
+
+no ip domain lookup
+ip routing 
+ipv6 unicast-routing
+
+service password-encryption
+security passwords min-length 10
+enable secret ramcie12345
+login block-for 60 attempts 10 within 15
+
+ip domain name ram-net.com
+username ramchi privilege 15 secret ramcie12345
+crypto key generate rsa general-keys modulus 1024
+
+line con 0
+logging synchronous
+password ramcie12345
+exec-timeout 1 30
+login
+exit
+
+line vty 0 4
+logging synchronous
+password ramcie12345
+transport input ssh
+login local
+exit
+
+banner motd "Unauthorized access is strictly prohibited!"
+
+int g0/0/0
+description "Link to ISP for EdgeRouter2"
+ip address 201.0.113.6 255.255.255.252
+ipv6 add 2001:db8:acad:2::2/64
+no shutdown
+
+int loopback 0
+description "Network management interface"
+ip add 10.10.90.253 255.255.255.0
+ipv6 add 2001:db8:acad:90::FFFE/64
+no shutdown
+
+ip route 0.0.0.0 0.0.0.0 201.0.113.5
+ipv6 route ::/0 2001:db8:acad:2::1/64
+

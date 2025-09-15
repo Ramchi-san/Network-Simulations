@@ -11,11 +11,19 @@ ipv6 add 2001:db8:acad:1::1/64
 no shutdown
 exit
 
-router ospf 100
-router-id 100.100.100.100
-network 201.0.113.0 0.0.0.3 area 0
-default-information originate
-exit
+int g0/0/1
+description "Link to EdgeRouter2"
+ip add 201.0.113.5 255.255.255.252
+ipv6 add 2001:db8:acad:2::1/64
+no shutdown
 
-ip route 0.0.0.0 0.0.0.0 Null0
+! simulate upstream internet for ipv4
+ip route 0.0.0.0 0.0.0.0 null0
+
+
+! simulate upstream internet for ipv6
+! For real Cisco network devices: ipv6 route ::0/0 Null0
+! No substitute 
+
+
 
