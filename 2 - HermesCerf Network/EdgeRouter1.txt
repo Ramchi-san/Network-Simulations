@@ -9,7 +9,7 @@ security passwords min-length 10
 enable secret ramcie12345
 login block-for 60 attempts 10 within 15
 
-ip domain name ram-net.com
+ip domain-name ram-net.com
 username ramchi privilege 15 secret ramcie12345
 crypto key generate rsa general-keys modulus 1024
 
@@ -43,6 +43,33 @@ no shutdown
 
 ip route 0.0.0.0 0.0.0.0 201.0.113.1
 ipv6 route ::/0 2001:db8:acad:1::1/64
+
+int g0/0/1
+description "Link to CoreSwitch1"
+Ip address 192.168.100.2 255.255.255.252
+Ipv6 address 2001:acad:db8:0:100::2/64
+No shutdown
+
+int g0/0/0
+ip nat outside
+
+int g0/0/1
+ip nat inside
+
+access-list 10 permit 10.10.0.0 0.0.255.255
+
+ip access-list extended EDGE_INBOUND
+ remark Permit established replies and SSH from admin net
+ permit tcp any any established
+ permit icmp any any
+ deny ip any 10.10.0.0 0.0.255.255
+ permit ip any any
+
+
+ip nat inside source list 10 interface GigabitEthernet0/0 overload
+
+int g0/0/0
+ip access-group EDGE_INBOUND in
 
 
 

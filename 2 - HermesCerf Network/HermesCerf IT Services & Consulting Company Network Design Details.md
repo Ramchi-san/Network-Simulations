@@ -603,3 +603,4 @@ IPv4 Addressing Scheme
 IPv6 Addressing Scheme:
     > 
 
+Voice | VLAN 130 | 10.10.130.0/24 |
