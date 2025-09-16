@@ -1,8 +1,5 @@
-enable
-configure terminal
-
-hostname CoreSwitch1
 no ip domain lookup
+hostname CoreSwitch1
 
 ip routing
 ipv6 unicast-routing
@@ -13,7 +10,7 @@ login block-for 60 attempts 10 within 15
 banner motd "Unauthorized access is strictly prohibited!"
 
 ip domain name ram-net.com
-username ramchi privilege 15 secret ramcie12345
+username ramchi privilige 15 secret ramcie12345
 crypto key generate rsa general-keys modulus 1024
 
 line con 0
@@ -31,70 +28,72 @@ login local
 exit
 
 int g1/0/1
-Description “Link to EdgeRouter1”
-Ip address 192.168.100.1 255.255.255.252
-Ipv6 address 2001:acad:db8:0:100::1/54
+Description “Link to EdgeRouter2”
+no switchport
+Ip address 192.168.100.5 255.255.255.252
 no sh
 
 int range g1/0/2
-description "Link to EdgeRouter2"
+description "Link to EdgeRouter1"
+no switchport
 ip add 192.168.200.5 255.255.255.252
 no sh 
 
-router ospf 10
-network 192.168.200.4 255.255.255.252
 
 int vlan 10
 description "Software Engineering VLAN"
-ip address 10.10.10.1 255.255.255.0
+ip address 10.10.10.2 255.255.255.0
 
 int vlan 20
 description "Infrastructure VLAN"
-ip address 10.10.20.1 255.255.255.0
+ip address 10.10.20.2 255.255.255.0
 
 int vlan 30
 description "Technical Operations VLAN"
-ip address 10.10.30.1 255.255.255.224
+ip address 10.10.30.2 255.255.255.224
 
 int vlan 40
 description "Sales & Marketing VLAN"
-ip address 10.10.40.1 255.255.255.192
+ip address 10.10.40.2 255.255.255.192
 
 int vlan 50
 description "Customer Agents VLAN"
-ip address 10.10.50.1 255.255.255.0 
+ip address 10.10.50.2 255.255.255.0 
 
 int vlan 60
 description "Accounting & Payroll VLAN"
-ip address 10.10.60.1 255.255.255.224
+ip address 10.10.60.2 255.255.255.224
 
 int vlan 70
 description "Human Resources VLAN"
-ip address 10.10.70.1 255.255.255.192
+ip address 10.10.70.2 255.255.255.192
 
 int vlan 80
 description "Procurement VLAN"
-ip address 10.10.80.1 255.255.255.240
+ip address 10.10.80.2 255.255.255.240
 
 int vlan 90
 description "Network Management VLAN"
-ip addess 10.10.90.1 255.255.255.0
+ip addess 10.10.90.2 255.255.255.0
 
 int vlan 100
 description "Servers VLAN"
-ip add 10.10.100.1 255.255.255.0
+ip add 10.10.100.2 255.255.255.0
 
 int vlan 110
 description "Printers VLAN"
-ip add 10.10.110.1 255.255.255.0
+ip add 10.10.110.2 255.255.255.0
 
 int vlan 120 
 description "Wireless VLAN"
-ip add 10.10.120.1 255.255.255.0
+ip add 10.10.120.2 255.255.255.0
 
 int vlan 130
 description "Voice VLAN"
-ip add 10.10.130.1 255.255.255.0
+ip add 10.10.130.2 255.255.255.0
+
+
+
 
 vlan 10
 name "Software Engineering"
@@ -120,12 +119,15 @@ vlan 110
 name "Printers"
 vlan 120
 name "Wireless"
-vlan 30
+vlan 130
 name "Voice"
 
+
+
 router ospf 10
-router-id 111.111.111.111
-network 192.168.100.0 0.0.0.3 area 0
+router-id 222.222.222.222
+network 192.168.100.4 255.255.255.252 area 0
+network 192.168.200.0 255.255.255.252 area 0
 network 10.10.10.0 0.0.0.255 area 0
 network 10.10.20.0 0.0.0.255 area 0
 network 10.10.30.0 0.0.0.31 area 0
@@ -139,31 +141,6 @@ network 10.10.100.0 0.0.0.255 area 0
 network 10.10.110.0 0.0.0.255 area 0
 network 10.10.120.0 0.0.0.255 area 0
 network 10.10.130.0 0.0.0.255 area 0
-
-
-
-int range g1/0/3-4
-description "Etherchannel links to CoreSwitch2"
-switchport mode trunk
-channel-group 1 mode active
-
-
-int po1
-switchport trunk native vlan 90
-switchport trunk allowed vlan 10,20,30,40,50,60,70,80,100,110,120,130
-
-int loopback 0
-ip add 10.10.90.252 255.255.255.0
-no sh
-
-
-
-
-
-
-
-
-
 
 
 

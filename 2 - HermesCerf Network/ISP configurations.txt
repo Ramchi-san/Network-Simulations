@@ -4,18 +4,21 @@ ip routing
 ipv6 unicast routing
 
 
-int g0/0/0
+int se0/1/0
 description "Link to EdgeRouter1"
 ip add 201.0.113.1 255.255.255.252
 ipv6 add 2001:db8:acad:1::1/64
+clock rate 1000000
 no shutdown
 exit
 
-int g0/0/1
+int se0/1/1
 description "Link to EdgeRouter2"
 ip add 201.0.113.5 255.255.255.252
 ipv6 add 2001:db8:acad:2::1/64
+clock rate 1000000
 no shutdown
+
 
 ! simulate upstream internet for ipv4
 ip route 0.0.0.0 0.0.0.0 null0
@@ -24,6 +27,7 @@ ip route 0.0.0.0 0.0.0.0 null0
 ! simulate upstream internet for ipv6
 ! For real Cisco network devices: ipv6 route ::0/0 Null0
 ! No substitute 
+
 
 
 

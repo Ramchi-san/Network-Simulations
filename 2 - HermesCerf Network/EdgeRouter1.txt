@@ -29,10 +29,11 @@ exit
 
 banner motd "Unauthorized access is strictly prohibited!"
 
-int g0/0/0
+int se0/1/0
 description "Link to ISP for EdgeRouter1"
 ip address 201.0.113.2 255.255.255.252
 ipv6 add 2001:db8:acad:1::2/64
+ip nat outside
 no shutdown
 
 int loopback 0
@@ -41,20 +42,19 @@ ip add 10.10.90.254 255.255.255.0
 ipv6 add 2001:db8:acad:90::FFFF/64
 no shutdown
 
-ip route 0.0.0.0 0.0.0.0 201.0.113.1
-ipv6 route ::/0 2001:db8:acad:1::1/64
-
-int g0/0/1
+int g0/0/0
 description "Link to CoreSwitch1"
 Ip address 192.168.100.2 255.255.255.252
 Ipv6 address 2001:acad:db8:0:100::2/64
+ip nat inside
 No shutdown
 
-int g0/0/0
-ip nat outside
-
 int g0/0/1
+description "Link to CoreSwitch2"
+Ip address 192.168.200.2 255.255.255.252
 ip nat inside
+No shutdown
+
 
 access-list 10 permit 10.10.0.0 0.0.255.255
 
@@ -66,14 +66,47 @@ ip access-list extended EDGE_INBOUND
  permit ip any any
 
 
-ip nat inside source list 10 interface GigabitEthernet0/0 overload
+ip nat inside source list 10 interface se0/1/0 overload
 
-int g0/0/0
+int se0/1/0
 ip access-group EDGE_INBOUND in
 
 
+ip route 0.0.0.0 0.0.0.0 201.0.113.1
+ipv6 route ::0/0 2001:db8:acad:1::1
+
+route ospf 10
+router-id 100.100.100.100
+network 192.168.100.0 0.0.0.3 area 0
+network 192.168.200.0 0.0.0.3 area 0
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int g0/1/0
+description "Link to CoreSwitch2"
+ip address 192.168.200.2 255.255.255.252
+Ipv6 address 2001:acad:db8:0:200::2/64
+No shutdown
 
 
 

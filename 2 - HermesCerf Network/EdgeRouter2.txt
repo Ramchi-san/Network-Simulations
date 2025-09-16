@@ -1,6 +1,7 @@
-hostname EdgeRouter1
-
 no ip domain lookup
+
+hostname EdgeRouter2
+
 ip routing 
 ipv6 unicast-routing
 
@@ -29,7 +30,7 @@ exit
 
 banner motd "Unauthorized access is strictly prohibited!"
 
-int g0/0/0
+int se0/1/0
 description "Link to ISP for EdgeRouter2"
 ip address 201.0.113.6 255.255.255.252
 ipv6 add 2001:db8:acad:2::2/64
@@ -42,5 +43,51 @@ ipv6 add 2001:db8:acad:90::FFFE/64
 no shutdown
 
 ip route 0.0.0.0 0.0.0.0 201.0.113.5
-ipv6 route ::/0 2001:db8:acad:2::1/64
+ipv6 route ::0/0 2001:db8:acad:2::1
+
+int se0/1/0
+ip nat outside
+
+int g0/0/0
+description "Link to CoreSwitch2"
+Ip address 192.168.100.6 255.255.255.252
+ip nat inside
+No shutdown
+
+int g0/0/1
+description "Link to CoreSwitch1"
+Ip address 192.168.200.6 255.255.255.252
+ip nat inside
+No shutdown
+
+
+access-list 10 permit 10.10.0.0 0.0.255.255
+
+ip access-list extended EDGE_INBOUND
+ remark Permit established replies and SSH from admin net
+ permit tcp any any established
+ permit icmp any any
+ deny ip any 10.10.0.0 0.0.255.255
+ permit ip any any
+
+
+ip nat inside source list 10 interface se0/1/0 overload
+
+int se0/1/0
+ip access-group EDGE_INBOUND in
+
+router ospf 10
+router-id 200.200.200.200
+network 192.168.100.4 0.0.0.3 area 0
+network 192.168.200.4 0.0.0.3 area 0
+
+
+
+
+
+
+
+
+
+
 
