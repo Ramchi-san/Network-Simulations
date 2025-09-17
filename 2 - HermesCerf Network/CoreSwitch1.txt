@@ -156,6 +156,163 @@ int loopback 0
 ip add 10.10.90.252 255.255.255.0
 no sh
 
+spanning-tree vlan 10 root primary
+spanning-tree vlan 20 root primary
+spanning-tree vlan 30 root primary
+spanning-tree vlan 40 root primary
+spanning-tree vlan 50 root primary
+spanning-tree vlan 60 root primary
+spanning-tree vlan 70 root primary
+spanning-tree vlan 80 root primary
+spanning-tree vlan 90 root primary
+spanning-tree vlan 100 root primary
+spanning-tree vlan 110 root primary
+spanning-tree vlan 120 root primary
+spanning-tree vlan 130 root primary
+
+
+
+interface vlan 10
+ standby 1 ip 10.10.10.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 20
+ standby 1 ip 10.10.20.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 30
+ standby 1 ip 10.10.30.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 40
+ standby 1 ip 10.10.40.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 50
+ standby 1 ip 10.10.50.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 60
+ standby 1 ip 10.10.60.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 70
+ standby 1 ip 10.10.70.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 80
+ standby 1 ip 10.10.80.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 90
+ standby 1 ip 10.10.90.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 100
+ standby 1 ip 10.10.100.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 110
+ standby 1 ip 10.10.110.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 120
+ standby 1 ip 10.10.120.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+interface vlan 130
+ standby 1 ip 10.10.130.254
+ standby 1 priority 110
+ standby 1 preempt
+ standby 1 track port-channel1 20
+ no shutdown
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
