@@ -555,12 +555,12 @@ IPv6 Addressing Scheme:
     > 
 
 
-Procurement | VLAN 80 | 10.10.80.0/28|
+Procurement | VLAN 80 | 10.10.80.0/27|
 IPv4 Addressing Scheme
     > Network Address: 10.10.80.0
-    > Subnet Mask: 255.255.255.240
-    > Usable host range: 10.10.80.1 - 10.10.80.14
-    > Broadcast address: 10.10.80.15
+    > Subnet Mask: 255.255.255.192
+    > Usable host range: 10.10.80.1 - 10.10.80.30
+    > Broadcast address: 10.10.80.31
 IPv6 Addressing Scheme:
     >  
 

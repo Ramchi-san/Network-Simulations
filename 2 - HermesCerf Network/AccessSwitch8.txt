@@ -1,0 +1,112 @@
+sdm prefer dual-ipv4-and-ipv6 default
+
+reload
+
+no ip domain lookup
+hostname AccessSwitch8
+
+service password-encryption
+enable secret ramcie12345
+banner motd "Unauthorized access is strictly prohibited!"
+
+spanning-tree mode rapid-pvst
+
+ip domain name ram-net.com
+username ramchi privilege 15 secret ramcie12345
+crypto key generate rsa general-keys modulus 1024
+
+line con 0
+logging synchronous
+password ramcie12345
+exec-timeout 1 30
+login
+exit
+
+line vty 0 4
+logging synchronous
+transport input ssh
+password ramcie12345
+login local
+exit
+
+
+vlan 10
+name "Software Engineering"
+vlan 20
+name "Infrastructure"
+vlan 30
+name "Technical Operations"
+vlan 40
+name "Sales & Marketing"
+vlan 50
+name "Customer Agents"
+vlan 60
+name "Accounting & Payroll"
+vlan 70
+name "Human Resources"
+vlan 80
+name "Procurement"
+vlan 90 
+name "Network Management"
+vlan 100
+name "Servers"
+vlan 110
+name "Printers"
+vlan 120
+name "Wireless"
+vlan 130
+name "Voice"
+
+int range fa0/1-2
+description "Etherchannel links to CoreSwitch1"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+channel-group 1 mode active
+no shutdown
+
+int po1
+description "Etherchannel link2 to CoreSwitch1"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+
+
+int range fa0/3-4
+description "Etherchannel links to CoreSwitch2"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+channel-group 2 mode active
+no shutdown
+
+int po2
+description "Etherchannel link to CoreSwitch2"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+
+int range fa0/5-21
+description "Access ports for the Customer Agents Department (VLAN 60)"
+switchport mode access
+switchport access vlan 60
+spanning-tree portfast
+spanning-tree bpduguard enable
+
+int fa0/22
+description "Access port for the Accounting & Payroll Department Printer (VLAN 110)"
+switchport mode access
+switchport access vlan 110
+spanning-tree portfast
+spanning-tree bpduguard enable
+
+int fa0/23
+description "Access port for the Accounting & Payroll Department IP Phone (VLAN 130)"
+switchport mode access
+switchport access vlan 60
+switchport voice vlan 130
+spanning-tree portfast
+spanning-tree bpduguard enable
+
+int fa0/24
+description "Access port for the Accounting & Payroll Department AP (VLAN 120)"
+switchport mode access
+switchport access vlan 120
+spanning-tree portfast
+spanning-tree bpduguard enable
