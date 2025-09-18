@@ -187,7 +187,7 @@ interface vlan 20
  no shutdown
 
 interface vlan 30
- standby 1 ip 10.10.30.254
+ standby 1 ip 10.10.30.30
  standby 1 priority 110
  standby 1 preempt
  standby 1 track port-channel1 20
@@ -262,6 +262,79 @@ interface vlan 130
  standby 1 preempt
  standby 1 track port-channel1 20
  no shutdown
+
+int range g1/0/5-6
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+channel-group 2 mode active
+no shutdown
+
+
+int range g1/0/7-8
+description "Etherchannel links to AccessSwitch2"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+channel-group 3 mode active
+no shutdown
+
+int po3
+description "Etherchannel link to AccessSwitch2"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+
+
+
+int vlan 10
+ip helper-address 10.10.100.3
+int vlan 20
+ip helper-address 10.10.100.3
+int vlan 30
+ip helper-address 10.10.100.3
+int vlan 40
+ip helper-address 10.10.100.3
+int vlan 50
+ip helper-address 10.10.100.3
+int vlan 60
+ip helper-address 10.10.100.3
+int vlan 70
+ip helper-address 10.10.100.3
+int vlan 80
+ip helper-address 10.10.100.3
+int vlan 110
+ip helper-address 10.10.100.3
+int vlan 120
+ip helper-address 10.10.100.3
+int vlan 130
+ip helper-address 10.10.100.3
+
+
+int range g1/0/9-10
+description "Etherchannel links to AccessSwitch3"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+channel-group 4 mode active
+no shutdown
+
+int po4
+description "Etherchannel link to AccessSwitch3"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+
+
+int range g1/0/11-12
+description "Etherchannel links to AccessSwitch4"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+channel-group 5 mode active
+no shutdown
+
+int po5
+description "Etherchannel link to AccessSwitch4"
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
+
+
+
 
 
 

@@ -1,17 +1,18 @@
 sdm prefer dual-ipv4-and-ipv6 default
 
-no ip domain lookup
-hostname AccessSwitch2
+reload
 
+no ip domain lookup
+hostname AccessSwitch3
 service password-encryption
 enable secret ramcie12345
 banner motd "Unauthorized access is strictly prohibited!"
 
-spanning-tree mode rapid-pvst
-
 ip domain name ram-net.com
 username ramchi privilege 15 secret ramcie12345
 crypto key generate rsa general-keys modulus 1024
+
+spanning-tree mode rapid-pvst
 
 line con 0
 logging synchronous
@@ -79,41 +80,34 @@ description "Etherchannel link to CoreSwitch2"
 switchport mode trunk
 switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,100,110,120,130
 
+
 int range fa0/5-21
-description "Access ports for the Software Engineering Department (VLAN 10)"
+description "Access ports for the Infrastructure Department (VLAN 20)"
 switchport mode access
-switchport access vlan 10
+switchport access vlan 20
 spanning-tree portfast
 spanning-tree bpduguard enable
 
 int fa0/22
-description "Access port for the Software Engineering Department Printer (VLAN 110)"
+description "Access port for the Infrastructure Department Printer (VLAN 110)"
 switchport mode access
 switchport access vlan 110
 spanning-tree portfast
 spanning-tree bpduguard enable
 
 int fa0/23
-description "Access port for the Software Engineering Department IP Phone (VLAN 130)"
+description "Access port for the Infrastructure Department IP Phone (VLAN 10 & 130)"
 switchport mode access
-switchport access vlan 130
+switchport access vlan 20
+switchport voice vlan 130
 spanning-tree portfast
 spanning-tree bpduguard enable
 
 int fa0/24
-description "Access port for the Software Engineering Department AP (VLAN 120)"
+description "Access port for the Infrastructure Department AP (VLAN 120)"
 switchport mode access
 switchport access vlan 120
 spanning-tree portfast
 spanning-tree bpduguard enable
-
-
-
-
-
-
-
-
-
 
 
