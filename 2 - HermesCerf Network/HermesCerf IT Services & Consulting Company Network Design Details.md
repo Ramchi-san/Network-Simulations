@@ -1,8 +1,6 @@
 # HermesCerf IT Services & Consulting Company Design Details
 
-The HermesCerf IT Service & Consulting is a medium-sized IT services and consulting firm that operates from a 2-floor office with almost a 100 employees.
-
-The network supports departmental VLANs, dynamic routing with OSPF, and VLSM-based efficient IP addressing. The physical topology showcases redundant edge routers and the utilization of a collapsed core model, with the edge routers feeding into two core multilayer switches, and distributed via location-based division access switches per floor.
+The HermesCerf IT Service & Consulting is a medium-sized IT services and consulting firm. It operates a network supports departmental VLANs, dynamic routing with OSPF, and VLSM-based efficient IP addressing. The physical topology showcases redundant edge routers and the utilization of a collapsed core model, with the edge routers feeding into two core multilayer switches, and distributed via location-based division access switches per floor.
 
 ## Departments & Personnel
 
