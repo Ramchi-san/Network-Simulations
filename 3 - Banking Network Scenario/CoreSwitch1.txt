@@ -1,0 +1,42 @@
+no ip domain lookup
+hostname Distribution_MLS1
+
+int vlan 10
+description "Corporate Banking VLAN for Corporate & Relationship Managers"
+ip add 10.1.10.1 255.255.255.0
+no sh
+
+int vlan 20
+description "Retail Banking VLAN for tellers, account clerks, etc."
+ip add 10.1.20.1 255.255.255.0
+no sh
+
+int vlan 100
+description "Servers VLAN"
+ip add 10.1.100.1 255.255.255.0
+no sh
+
+vlan 10
+name "Corporate Banking"
+vlan 20
+name "Retail Banking"
+vlan 100
+name "Servers"
+
+int r g1/0/2-4
+switchport mode trunk
+switchport trunk allowed vlan 10,20,100
+
+int vlan 10
+ip helper-address 10.1.100.2
+int vlan 20
+ip helper-address 10.1.100.2
+
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,100
+
+int r g1/0/2-4
+ip dhcp snooping trust
+
+
+

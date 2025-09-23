@@ -1,0 +1,24 @@
+vlan 10
+name "Corporate Banking"
+vlan 20
+name "Retail Banking"
+vlan 100
+name "Servers"
+
+int fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 10,20,100
+
+int fa0/2
+switchport mode access
+switchport access vlan 100
+
+!for switch1-3
+int fa0/1
+ip dhcp snooping trust
+
+!for switch3
+int fa0/2
+ip dhcp snooping trust
+
+
